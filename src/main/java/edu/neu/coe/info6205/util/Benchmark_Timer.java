@@ -4,6 +4,8 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.simple.InsertionSort;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -125,4 +127,11 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     private final Consumer<T> fPost;
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
+
+    public static void main(String[] args) {
+        Integer[] array = {3, 7, 4, 2, 5};
+        Consumer<Integer[]> func = input -> new InsertionSort<Integer>().sort(input,0,input.length);
+        Benchmark_Timer<Integer[]> t = new Benchmark_Timer<Integer[]>("Insertion Sort Benchmark", func);
+        t.run(array, 10);
+    }
 }
